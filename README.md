@@ -1,6 +1,6 @@
 # IUA Debug Tools
 
-Simple dialog for debuggin purposes with logger.
+Simple dialog for debugging purposes with logger.
 
 ![screenshot 1](https://github.com/ihorsuniversalapps/iua-debug-tools/raw/master/screenshot1.png "ScreenShot Of DebugPanel")
 
@@ -19,8 +19,8 @@ dependencies {
 ```
 ### Usage
 
-For show debug panel put next code in your `Activity` class in the `#onCreate()` method, for instance
-(In the reality you should open it from button click listener or some another place).
+Put next code in your `Activity` class in the `#onCreate()` method, for instance
+(In the reality you should open it from button click listener or some another trigger).
 
 ```java
 @Override
@@ -34,7 +34,7 @@ For show debug panel put next code in your `Activity` class in the `#onCreate()`
 ```
 ### Logger
 
-For adding itens to log call:
+For adding items to log call:
 
 ```java
 Logger.getInstance().log(this, Logger.LogType.DEBUG, "Test");
