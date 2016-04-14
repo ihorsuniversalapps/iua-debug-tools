@@ -1,1 +1,1 @@
-include ':app', ':iuadebugtools'
+include ':app', ':iua-debug-tools'
