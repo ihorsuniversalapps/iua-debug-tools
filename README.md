@@ -14,7 +14,7 @@ Include the dependency:
 
 ```groovy
 dependencies {
-    compile 'ua.in.iua:iua-debug-tools:1.0.0'
+    compile 'ua.in.iua:iua-debug-tools:1.0.1'
 }
 ```
 ### Usage
@@ -24,13 +24,16 @@ Put next code in your `Activity` class in the `#onCreate()` method, for instance
 
 ```java
 @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
 
-        DebugPanelDialog panel = new DebugPanelDialog.newIntance("serverName", BuildConfig.VERSION_NAME);
-        panel.show(this);
-    }
+    DebugPanelDialog panel = new DebugPanelDialog.newInstance(
+        "serverName", 
+        BuildConfig.VERSION_NAME,
+        new LogAdapter(this, Logger.getInstance().getLogMessages()));
+    panel.show(this);
+}
 ```
 ### Logger
 

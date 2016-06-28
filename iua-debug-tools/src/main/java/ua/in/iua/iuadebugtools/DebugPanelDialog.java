@@ -3,6 +3,7 @@ package ua.in.iua.iuadebugtools;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -22,11 +24,13 @@ public class DebugPanelDialog extends BaseFullscreenDialog {
     private String mServerName;
     private String mApplicationVersion;
     private Runnable mRunnable;
+    private ListAdapter mListAdapter;
 
-    public static DebugPanelDialog newInstance(String serverName, String applicationVersion) {
+    public static DebugPanelDialog newInstance(@NonNull String serverName, @NonNull String applicationVersion, @NonNull ListAdapter adapter) {
         DebugPanelDialog fragment = new DebugPanelDialog();
         fragment.mServerName = serverName;
         fragment.mApplicationVersion = applicationVersion;
+        fragment.mListAdapter = adapter;
         return fragment;
     }
 
@@ -40,7 +44,7 @@ public class DebugPanelDialog extends BaseFullscreenDialog {
         tvApplicationVersion.setText(String.format("Version: %s", mApplicationVersion));
 
         ListView lvLog = (ListView) view.findViewById(R.id.lvLog);
-        lvLog.setAdapter(new LogAdapter(getActivity(), Logger.getInstance().getLogMessages()));
+        lvLog.setAdapter(mListAdapter);
 
         setCancelable(false);
 

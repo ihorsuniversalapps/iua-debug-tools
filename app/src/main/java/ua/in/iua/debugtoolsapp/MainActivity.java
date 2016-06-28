@@ -7,6 +7,7 @@ import android.widget.Button;
 
 import ua.in.iua.iuadebugtools.BuildConfig;
 import ua.in.iua.iuadebugtools.DebugPanelDialog;
+import ua.in.iua.iuadebugtools.LogAdapter;
 import ua.in.iua.iuadebugtools.Logger;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,7 +29,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mDebugPanelDialog == null) {
-                    mDebugPanelDialog = DebugPanelDialog.newInstance("testServer", BuildConfig.VERSION_NAME);
+                    mDebugPanelDialog = DebugPanelDialog.newInstance(
+                            "testServer",
+                            BuildConfig.VERSION_NAME,
+                            new LogAdapter(MainActivity.this, Logger.getInstance().getLogMessages()));
                 }
                 mDebugPanelDialog.show(MainActivity.this);
             }

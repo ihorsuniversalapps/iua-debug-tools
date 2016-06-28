@@ -122,6 +122,13 @@ public class Logger {
             mDate = new Date();
         }
 
+        public LogMessage(Object object, LogType logType, String message, Date issued) {
+            mLoggedClassName = object.getClass().getName();
+            mLogType = logType;
+            mMessage = message;
+            mDate = issued;
+        }
+
         @Override
         public String toString() {
             return "LogMessage{" +

@@ -12,7 +12,7 @@ import java.util.List;
 /***
  * Debug console log messages adapter.
  */
-class LogAdapter extends BaseAdapter {
+public class LogAdapter extends BaseAdapter {
 
     private final List<Logger.LogMessage> mLogMessages;
     private final Context mContext;
