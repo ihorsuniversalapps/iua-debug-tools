@@ -14,7 +14,7 @@ Include the dependency:
 
 ```groovy
 dependencies {
-    compile 'ua.in.iua:iua-debug-tools:1.0.1'
+    compile 'ua.in.iua:iua-debug-tools:1.0.2'
 }
 ```
 ### Usage

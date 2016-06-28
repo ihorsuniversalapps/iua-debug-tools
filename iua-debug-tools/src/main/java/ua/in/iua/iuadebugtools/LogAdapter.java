@@ -14,10 +14,10 @@ import java.util.List;
  */
 public class LogAdapter extends BaseAdapter {
 
-    private final List<Logger.LogMessage> mLogMessages;
+    private final List<LogMessage> mLogMessages;
     private final Context mContext;
 
-    public LogAdapter(Context context, List<Logger.LogMessage> logMessages) {
+    public LogAdapter(Context context, List<LogMessage> logMessages) {
         mLogMessages = logMessages;
         mContext = context;
     }
@@ -28,7 +28,7 @@ public class LogAdapter extends BaseAdapter {
     }
 
     @Override
-    public Logger.LogMessage getItem(int position) {
+    public LogMessage getItem(int position) {
         return mLogMessages.get(position);
     }
 
@@ -52,7 +52,7 @@ public class LogAdapter extends BaseAdapter {
         }
 
         ViewHolder holder = (ViewHolder) view.getTag();
-        Logger.LogMessage item = getItem(position);
+        LogMessage item = getItem(position);
 
         holder.getLogClassName().setText(item.getLoggedClassName());
         holder.getLogDateTime().setText(item.getDate().toString());
@@ -60,23 +60,23 @@ public class LogAdapter extends BaseAdapter {
 
         switch (item.getLogType()) {
             case INFO:
-                holder.getLogType().setText("INFO:");
+                holder.getLogType().setText(R.string.info);
                 holder.getBackgroundView().setBackgroundColor(0xffaaffaa);
                 break;
             case WARNING:
-                holder.getLogType().setText("WARNING:");
+                holder.getLogType().setText(R.string.warning);
                 holder.getBackgroundView().setBackgroundColor(0xffffffaa);
                 break;
             case DEBUG:
-                holder.getLogType().setText("DEBUG:");
+                holder.getLogType().setText(R.string.debug);
                 holder.getBackgroundView().setBackgroundColor(0xffffaaff);
                 break;
             case ERROR:
-                holder.getLogType().setText("ERROR:");
+                holder.getLogType().setText(R.string.error);
                 holder.getBackgroundView().setBackgroundColor(0xffffaaaa);
                 break;
             case VERBOSE:
-                holder.getLogType().setText("VERBOSE:");
+                holder.getLogType().setText(R.string.verbose);
                 holder.getBackgroundView().setBackgroundColor(0xffffffff);
                 break;
         }

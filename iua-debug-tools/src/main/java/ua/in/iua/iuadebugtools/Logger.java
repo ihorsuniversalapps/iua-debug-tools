@@ -6,7 +6,6 @@ import com.google.common.collect.EvictingQueue;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 /** *
@@ -64,7 +63,7 @@ public class Logger {
     public void log(Object object, LogType type, String message) {
         LogMessage logMessage = new LogMessage(object, type, message);
         mLogMessages.add(logMessage);
-        switch (logMessage.mLogType) {
+        switch (logMessage.getLogType()) {
             case INFO:
                 Log.i("LOGGER", logMessage.toString());
                 break;
@@ -80,79 +79,6 @@ public class Logger {
             case VERBOSE:
                 Log.v("LOGGER", logMessage.toString());
                 break;
-        }
-    }
-
-    /***
-     * Log message level.
-     */
-    public enum LogType {
-        INFO,
-        WARNING,
-        DEBUG,
-        ERROR,
-        VERBOSE
-    }
-
-    /***
-     * Class represents log message record.
-     */
-    public class LogMessage {
-        /***
-         * Class name of sender.
-         */
-        private final String mLoggedClassName;
-        /***
-         * Log type {@link LogType LogType}.
-         */
-        private final LogType mLogType;
-        /***
-         * Message.
-         */
-        private final String mMessage;
-        /***
-         * Log record date/time.
-         */
-        private final Date mDate;
-
-        public LogMessage(Object object, LogType logType, String message) {
-            mLoggedClassName = object.getClass().getName();
-            mLogType = logType;
-            mMessage = message;
-            mDate = new Date();
-        }
-
-        public LogMessage(Object object, LogType logType, String message, Date issued) {
-            mLoggedClassName = object.getClass().getName();
-            mLogType = logType;
-            mMessage = message;
-            mDate = issued;
-        }
-
-        @Override
-        public String toString() {
-            return "LogMessage{" +
-                    "loggedClassName='" + mLoggedClassName + '\'' +
-                    ", logType=" + mLogType +
-                    ", message='" + mMessage + '\'' +
-                    ", date=" + mDate +
-                    '}';
-        }
-
-        public String getLoggedClassName() {
-            return mLoggedClassName;
-        }
-
-        public Date getDate() {
-            return mDate;
-        }
-
-        public LogType getLogType() {
-            return mLogType;
-        }
-
-        public String getMessage() {
-            return mMessage;
         }
     }
 }

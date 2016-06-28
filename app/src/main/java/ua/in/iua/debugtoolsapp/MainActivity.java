@@ -8,6 +8,7 @@ import android.widget.Button;
 import ua.in.iua.iuadebugtools.BuildConfig;
 import ua.in.iua.iuadebugtools.DebugPanelDialog;
 import ua.in.iua.iuadebugtools.LogAdapter;
+import ua.in.iua.iuadebugtools.LogType;
 import ua.in.iua.iuadebugtools.Logger;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         assert btnShowConsole != null;
 
-        Logger.getInstance().log(this, Logger.LogType.DEBUG, "Test");
+        Logger.getInstance().log(this, LogType.DEBUG, "Test");
 
         btnShowConsole.setOnClickListener(new View.OnClickListener() {
             @Override
