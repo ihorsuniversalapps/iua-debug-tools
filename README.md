@@ -8,13 +8,13 @@ Simple dialog for debugging purposes with logger.
 
 ### Dependency
 
-[Download](https://bintray.com/phoenixria/maven/iua-debug-tools/1.0.0/view)
+[Download](https://bintray.com/phoenixria/maven/iua-debug-tools/1.0.3/view)
 
 Include the dependency:
 
 ```groovy
 dependencies {
-    compile 'ua.in.iua:iua-debug-tools:1.0.2'
+    compile 'ua.in.iua:iua-debug-tools:1.0.3'
 }
 ```
 ### Usage
@@ -28,6 +28,12 @@ protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
     setContentView(R.layout.activity_main);
 
+    final Logger logger = new LoggerImpl(100, true, LogType.DEBUG);
+
+    logger.i(this, "Logger initialized");
+
+    Collection<LogMessage> messages = logger.getMessages();
+    List<LogMessage> messageList = new ArrayList<>(messages);
     DebugPanelDialog panel = new DebugPanelDialog.newInstance(
         "serverName", 
         BuildConfig.VERSION_NAME,
@@ -40,7 +46,13 @@ protected void onCreate(Bundle savedInstanceState) {
 For adding items to log call:
 
 ```java
-Logger.getInstance().log(this, Logger.LogType.DEBUG, "Test");
+final Logger logger = new LoggerImpl(100, true, LogType.DEBUG);
+
+logger.i(this, "Info");
+logger.d(this, "Debug");
+logger.v(this, "Verbose");
+logger.w(this, "Warning");
+logger.e(this, "Error");
 ```
 
 All logged records you can see in the debug panel.

@@ -1,84 +1,80 @@
 package ua.in.iua.iuadebugtools;
 
-import android.util.Log;
+import android.support.annotation.NonNull;
 
-import com.google.common.collect.EvictingQueue;
+import java.util.Collection;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
-/** *
- * Logger.
- * Created by rusin on 22.12.15.
+/**
+ * mipoint
+ * Created by yeromchenko on 18.06.16
  */
 
-/***
- * Logger. Collects all log messages in one place for next processing.
- */
-public class Logger {
-    /***
-     * Static instance.
-     */
-    private static Logger sInstance;
-    /***
-     * Collection with log messages.
-     */
-    private final EvictingQueue<LogMessage> mLogMessages = EvictingQueue.create(100);
+public interface Logger {
 
-    private Logger() {
+    void addLogListener(LogListener logListener);
 
-    }
+    void removeLogListener(LogListener logListener);
+
+    /**
+     * Log a verbose message with optional format args.
+     */
+    void v(Object where, @NonNull String message, Object... args);
+
+    /**
+     * Log a verbose exception and a message with optional format args.
+     */
+    void v(Object where, Throwable t, @NonNull String message, Object... args);
+
+    /**
+     * Log a debug message with optional format args.
+     */
+    void d(Object where, @NonNull String message, Object... args);
+
+    /**
+     * Log a debug exception and a message with optional format args.
+     */
+    void d(Object where, Throwable t, @NonNull String message, Object... args);
+
+    /**
+     * Log an info message with optional format args.
+     */
+    void i(Object where, @NonNull String message, Object... args);
+
+    /**
+     * Log an info exception and a message with optional format args.
+     */
+    void i(Object where, Throwable t, @NonNull String message, Object... args);
+
+    /**
+     * Log a warning message with optional format args.
+     */
+    void w(Object where, @NonNull String message, Object... args);
+
+    /**
+     * Log a warning exception and a message with optional format args.
+     */
+    void w(Object where, Throwable t, @NonNull String message, Object... args);
+
+    /**
+     * Log an error message with optional format args.
+     */
+    void e(Object where, @NonNull String message, Object... args);
+
+    /**
+     * Log an error exception and a message with optional format args.
+     */
+    void e(Object where, Throwable t, @NonNull String message, Object... args);
+
+    /**
+     * Returns last log messages
+     * @param limit result collection size limit
+     * @return collection of last log messages{@link LogMessage} if supports or empty collection.
+     */
+    Collection<LogMessage> getMessages(int limit);
 
     /***
-     * Returns instance of logger.
-     *
-     * @return Logger instance.
+     * Returns last log messages with default limit
+     * @return collection of last log messages{@link LogMessage} if supports or empty collection.
      */
-    synchronized public static Logger getInstance() {
-        if (sInstance == null) {
-            sInstance = new Logger();
-        }
-        return sInstance;
-    }
-
-    /***
-     * Returns all logged messages.
-     *
-     * @return Queue of messages.
-     */
-    public List<LogMessage> getLogMessages() {
-        ArrayList<LogMessage> logMessages = new ArrayList<>(mLogMessages);
-        Collections.reverse(logMessages);
-        return logMessages;
-    }
-
-    /***
-     * Writes log message to logger.
-     *
-     * @param object  Sender of log message.
-     * @param type    Type of message {@link LogType LogType}.
-     * @param message Message.
-     */
-    public void log(Object object, LogType type, String message) {
-        LogMessage logMessage = new LogMessage(object, type, message);
-        mLogMessages.add(logMessage);
-        switch (logMessage.getLogType()) {
-            case INFO:
-                Log.i("LOGGER", logMessage.toString());
-                break;
-            case WARNING:
-                Log.w("LOGGER", logMessage.toString());
-                break;
-            case DEBUG:
-                Log.d("LOGGER", logMessage.toString());
-                break;
-            case ERROR:
-                Log.e("LOGGER", logMessage.toString());
-                break;
-            case VERBOSE:
-                Log.v("LOGGER", logMessage.toString());
-                break;
-        }
-    }
+    Collection<LogMessage> getMessages();
 }
